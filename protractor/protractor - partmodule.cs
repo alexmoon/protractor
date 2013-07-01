@@ -331,6 +331,10 @@ public class ProtractorModule : PartModule
                             }
                             else
                             {
+								double angleToPrograde, ejectionInclination, calculateDeltaV;
+								LambertSolver.EjectionBurn(Planetarium.GetUniversalTime(), FlightGlobals.ActiveVessel, planet, out angleToPrograde, out ejectionInclination, out calculateDeltaV);
+								Debug.Log (String.Format ("angleToPrograde, ejectionInclination, deltaV: {0}, {1}, {2}", angleToPrograde, ejectionInclination, calculateDeltaV));
+								//LambertSolver.NextLaunchWindowUT(FlightGlobals.ActiveVessel.mainBody, planet);
                                 focusbody = planet;
                             }
                         }
