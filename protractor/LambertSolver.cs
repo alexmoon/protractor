@@ -44,7 +44,7 @@ public static class LambertSolver
 			bool longWay = false;
 
 			Func<Vector2d, Vector2d, Range> boundsFunc = (Vector2d point, Vector2d direction) => {
-				double t_xmin, t_xmax;
+				double t_xmin = 0, t_xmax = 0;
 				if (direction.x != 0) {
 					if (direction.x > 0) {
 						t_xmin = (xmin - point.x) / direction.x;
@@ -335,7 +335,7 @@ public static class LambertSolver
 		// Uses Powell's method to find the local minimum of f(x,y) within the bounds returned by getBounds(point, direction): http://en.wikipedia.org/wiki/Powell's_method
 		Queue<Vector2d> directionVectors = new Queue<Vector2d> (new Vector2d[] { new Vector2d (1, 0), new Vector2d (0, 1) });
 		double sqrPrecision = precision * precision;
-		Vector3d result;
+		Vector3d result = new Vector3d();
 
 		Func<Vector2d, Vector2d, Vector2d> findMinimumAlongDirection = (p, direction) => {
 			double u;
@@ -575,8 +575,6 @@ public static class LambertSolver
 	{
 		vinf = vinf.normalized;
 		prograde = prograde.normalized;
-
-		// TODO: This doesn't really work for inclined hyperbolic orbits. Figure out how to rework it.
 
 		// We have three equations of three unknowns (v.x, v.y, v.z):
 		//   dot(v, vinf) = cos(eta) = -1 / e  [Eq. 4.81]
